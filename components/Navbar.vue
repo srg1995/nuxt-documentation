@@ -1,10 +1,11 @@
 <script lang="ts" setup>
-const username = "usuario1";
+const username = "User1";
 </script>
 
 <template>
-  <nav>
-    <ul>
+  <nav class="container mx-auto flex justify-between">
+    <NuxtLink to="/" class="font-bold">Nuxt Documentation</NuxtLink>
+    <ul class="flex gap-4">
       <li>
         <NuxtLink to="/">Home</NuxtLink>
       </li>
