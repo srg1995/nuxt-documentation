@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const username = "User1";
+const username = "1";
 </script>
 
 <template>
@@ -10,10 +10,10 @@ const username = "User1";
         <NuxtLink to="/">Home</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/user">User</NuxtLink>
+        <NuxtLink to="/users">Users</NuxtLink>
       </li>
       <li>
-        <NuxtLink :to="`/user/${username}`">{{ username }}</NuxtLink>
+        <NuxtLink :to="`/users/${username}`">User{{ username }}</NuxtLink>
       </li>
     </ul>
   </nav>
