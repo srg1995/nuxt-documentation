@@ -1,6 +1,6 @@
 <template>
   <div v-if="!items">Loading...</div>
-  <UAccordion v-else :items="accordionItems" />
+  <LazyUAccordion v-else :items="accordionItems" />
 </template>
 
 <script setup lang="ts">
