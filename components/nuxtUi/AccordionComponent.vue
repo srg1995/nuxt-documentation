@@ -1,35 +1,39 @@
+<template>
+  <div v-if="!items">Loading...</div>
+  <UAccordion v-else :items="accordionItems" />
+</template>
+
 <script setup lang="ts">
-import type { AccordionItem } from "@nuxt/ui";
-import { useSortable } from "@vueuse/integrations/useSortable";
+//imports
+import { fetchFakeData } from "~/services/faseService";
 
-const items = shallowRef<AccordionItem[]>([
-  {
-    label: "Icons",
-    icon: "i-lucide-smile",
-    content: "You have nothing to do, @nuxt/icon will handle it automatically.",
-  },
-  {
-    label: "Colors",
-    icon: "i-lucide-swatch-book",
-    slot: "colors" as const,
-    content:
-      "Choose a primary and a neutral color from your Tailwind CSS theme.",
-  },
-  {
-    label: "Components",
-    icon: "i-lucide-box",
-    content:
-      "You can customize components by using the `class` / `ui` props or in your app.config.ts.",
-  },
-]);
+//Interfaces
+interface Item {
+  title: string;
+  body: string;
+}
+interface AccordionItem {
+  label: string;
+  icon: string;
+  content: string;
+}
 
-const accordion = useTemplateRef<HTMLElement>("accordion");
+//APIS
+const { data: items } = useAsyncData<AccordionItem[]>(async () => {
+  const data = await fetchFakeData();
+  const dataParsed = data.map((item: Item) => {
+    return {
+      label: item.title,
+      icon: "i-lucide-smile",
+      content: item.body,
+    };
+  });
 
-useSortable(accordion, items, {
-  animation: 150,
+  return dataParsed;
+});
+
+//methods
+const accordionItems = computed(() => {
+  return items.value ?? [];
 });
 </script>
-
-<template>
-  <UAccordion ref="accordion" :items="items" />
-</template>
