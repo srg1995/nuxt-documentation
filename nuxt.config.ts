@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: true, // Habilitamos SSR por defecto
   target: "static", // Esto asegura que Nuxt genere un sitio estático cuando hacemos build
+  components: true,
   // Rutas estáticas para los usuarios
   generate: {
     routes: async (): Promise<string[]> => {
